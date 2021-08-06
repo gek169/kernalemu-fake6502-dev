@@ -18,6 +18,15 @@
    
 You have to specify one or more programs. They have to be in PRG format, i.e. the first two bytes of the file contain the load address. All files are loaded into the emulator's memory.
 
+## Compiling Programs using cc65
+
+An example program helloworld.prg has already been compiled by cc65.
+
+if you have cc65 installed on your system, you can compile my_program.c and run it.
+
+You can replace the code in my_program.c or alter the makefile to change the code however
+you like.
+
 ### Options
 
 * `-start <addr>`: entry point
