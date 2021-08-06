@@ -28,8 +28,15 @@ c128basic: all
 assembler64: all
 	./build/kernalemu demo/assembler64.prg
 
+helloworld: all
+	./build/kernalemu demo/helloworld.prg -machine c64
+
+my_program_for_commodore_64: all
+	cl65 -O -t c64 ./demo/my_program.c -o ./demo/my_program.prg
+	./build/kernalemu demo/my_program.prg -machine c64
+
 SATA: all
 	./build/kernalemu 1.Adventure\ Land.prg -machine vic20 -start 0x7F50
 
 clean:
-	rm -rf $(ODIR)
+	rm -rf $(ODIR) ./demo/my_program.prg
