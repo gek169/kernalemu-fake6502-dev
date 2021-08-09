@@ -211,11 +211,6 @@ typedef unsigned int uint32;
         else clearcarry();\
 }
 
-#define invcarrycalc(n) {\
-    if ((n) & 0xFF00) clearcarry();\
-        else setcarry();\
-}
-
 #define overflowcalc(n, m, o) { /* n = result, m = accumulator, o = memory */ \
     if (((n) ^ (ushort)(m)) & ((n) ^ (o)) & 0x0080) setoverflow();\
         else clearoverflow();\
@@ -794,17 +789,17 @@ static void sbc() {
      	value = getvalue() ^ 0x00FF;
     	result = (ushort)a + value + (ushort)(status & FLAG_CARRY);
     	result_saved = result;
+    	setcarry();
         if ((result & 0x0F) > 0x09) {
             result -= 0x06;
         }
         if ((result & 0xF0) > 0x90) {
             result -= 0x60;
+            clearcarry();
         }
-        invcarrycalc(result);
         signcalc(result);
         /*? I believe this is correct.*/
         overflowcalc(result_saved, a, value);
-        /*clockticks6502++;*/
     } else 
 #endif
     {
